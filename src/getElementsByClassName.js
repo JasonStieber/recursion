@@ -4,7 +4,7 @@
 // };
 
 // But instead we're going to implement it from scratch:
-var isClass(className, directory){
+var isClass = function(className, directory){
   if(className === directory.id){
     return [directory];
   }else{
@@ -14,41 +14,44 @@ var isClass(className, directory){
 
 var getElementsByClassName = function(className,currentDir,goingUp
 ) {
-  var classYes = isClass(className, currentDir);
+  console.log("we hav entered the function.");
   if(currentDir === undefined){
     // first run though of the programs only gets here
-    goingUp = false;
-    elementsInThisTree = [];
-    currentDir = document;
-    return [].concat(getElementsByClassName(className, currentDir));
-  }
+    console.log("this means thisis our first case I should only see this once.");
+    return [].concat(getElementsByClassName(className, document.body,false));
+    }
+  var arrIfCurrentDirIsClass = isClass(className, currentDir);
   if(goingUp){
+    console.log("This will only happen when we reach the bottom of a branch. should see this a few times.");
     var parent = currentDir.parentNode;
     var aunt = parentNode.nextSibling;
-    if(currentDir.parentNode.nextSibling !== null){
+    if(aunt !== null){
       //checked is parentNode has the correct tag and the parents sibling
-      return classYes.concat(getElementsByClassName(className,aunt,false));
+      return arrIfCurrentDirIsClass.concat(getElementsByClassName(className,aunt,false));
     }else if(parent === null){
-      return classYes;
+      console.log("BASE CASE BABY!");
+      return arrIfCurrentDirIsClass;
     }else{
-      return classYes.concat(getElementsByClassName(className, parent, true));
+      console.log("we are on the up path.");
+      return arrIfCurrentDirIsClass.concat(getElementsByClassName(className, parent, true));
     }
   }else{
-    if(currentDir.children.length >= 1){
+    console.log("we are on the down path.");
+    if(currentDir.children !== undefined){
       // the search will progress untill we reach the yongest child on the left side
-      return getElementsByClassName(className,currentDir.children[0],false);
+      console.log("we should be moving down to the next child here.");
+      return getElementsByClassName(className,(currentDir.children[0]),false);
     }else{
       if(currentDir.nextSibling !== null){
-        return classYes.concat(getElementsByClassName(className,currentDir.nextSibling,false);
+        console.log("brothers and sisters");
+      return arrIfCurrentDirIsClass.concat(getElementsByClassName(className,currentDir.nextSibling,false));
 
       }else{
-        return classYes.concat(getElementsByClassName(className,currentDir.parentNode,true);
+        return arrIfCurrentDirIsClass.concat(getElementsByClassName(className,currentDir.parentNode,true));
         //elementsInThisTree.concat(isClass(className, currentDir))
       }
     }
   }
-//return getElementsByClassName(className,currentDir.childNodes)
- //var thisLevelArray = [];
 };
 // parentNode
 // childNodes[nodenumber]
