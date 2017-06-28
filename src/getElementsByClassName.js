@@ -36,7 +36,7 @@ var getElementsByClassName = function(className,currentDir,goingUp
   }else{
     if(currentDir.children.length >= 1){
       // the search will progress untill we reach the yongest child on the left side
-      return getElementsByClassName(className,currentDir.children[0]);
+      return getElementsByClassName(className,currentDir.children[0],false);
     }else{
       if(currentDir.nextSibling !== null){
         return classYes.concat(getElementsByClassName(className,currentDir.nextSibling,false);
