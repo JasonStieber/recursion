@@ -37,6 +37,9 @@ var isClass = function(className, directory){
 // };
 var isClass = function(className, node){
   console.log(node);
+  if(node.classList === undefined){
+    return [];
+  }
   if(node.classList.contains(className)){
     return [node];
   }else{
@@ -51,6 +54,7 @@ var getElementsByClassName = function(className,currentDir){
   //    [document].concat(function(){
   if(currentDir === undefined){
     console.log('first step');
+    console.log(document);
     return getElementsByClassName(className,document.body);
   }
   var loopedArray = [];
