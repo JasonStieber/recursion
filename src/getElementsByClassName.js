@@ -5,8 +5,11 @@
 
 // But instead we're going to implement it from scratch:
 var isClass = function(className, directory){
-  console.log(directory);
+  // console.log(className);
+  console.log(directory.className);
   if(className === directory.className){
+    console.log("we have a match!");
+    console.log(directory);
     return [directory];
   }else{
     return [];
@@ -15,32 +18,22 @@ var isClass = function(className, directory){
 
 var getElementsByClassName = function(className,currentDir,goingUp
 ) {
-   //console.log("we hav entered the function.");
-   // console.log('1');
-  // console.log(className);
-  // console.log(currentDir.className);
-   // console.log(currentDir.classList);
-//   console.log(currentDir);
+
   if(currentDir === undefined){
     // first run though of the programs only gets here
-//    console.log("this means thisis our first case I should only see this once.");
-
-  //console.log([].concat(getElementsByClassName(className, document.body,false)));
-    return [].concat(getElementsByClassName(("."+className), document.body,false));
+    console.log([].concat(getElementsByClassName(className, document,false)));
+    return [].concat(getElementsByClassName((className), document,false));
     }
-  //  console.log('2');
   var arrIfCurrentDirIsClass = isClass(className, currentDir);
   if(goingUp){
-//  console.log('3');
-    //console.log("This will only happen when we reach the bottom of a branch. should see this a few times.");
     var parent = currentDir.parentNode;
     if(parent === null){
   //    console.log('4');
       console.log("BASE CASE BABY!");
       return arrIfCurrentDirIsClass;
     }else if(parent.nextSibling !== null){
-      //checked is parentNode has the correct tag and the parents sibling
-      return arrIfCurrentDirIsClass.concat(getElementsByClassName(className,parent.nextSibling,false));
+      var newArr = arrIfCurrentDirIsClass.concat(isClass(className,parent));
+      return newArr.concat(getElementsByClassName(className,parent.nextSibling,false));
     }else{
   //    console.log('5');
       //console.log("we are on the up path.");
@@ -56,7 +49,7 @@ var getElementsByClassName = function(className,currentDir,goingUp
       return getElementsByClassName(className,(currentDir.childNodes[0]),false);
     }else{
   //    console.log('8');
-    //  console.log('there are no more children ----------------');
+      console.log('there are no more children ----------------');
       if(currentDir.nextSibling !== null){
   //      console.log('9');
     //    console.log("brothers and sisters");

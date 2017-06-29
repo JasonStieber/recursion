@@ -5,20 +5,28 @@
 
 var stringifyJSON = function(obj) {
   // your code goes here
-
-  if(Number.isInteger(obj)){
-    return obj.toString();
+  console.log(obj);
+  if(obj === null){
+    return "null";
   }else if (Array.isArray(obj)) {
     var strJSon = '[';
-    for(var i = 0; i<obj.length; i++){
-//      strJSon += key.toString() + ':' + obj[key].toString() + ',';
+    for(var i = 0; i <obj.length; i++){
+     strJSon += stringifyJSON(obj[i]);
     }strJSon += ']';
     return strJSon;
-  }
-  else{
+  }else if(obj.toSting === obj){
+    return "'" + obj + "'";
+  }else if(Number.isInteger(obj)){
+    return obj.toString();
+  }else if(obj === true){
+    return 'true';
+  }else if(obj === false){
+      return 'false';
+  }else{
       var strJSon = '{';
       for(var key in obj){
-        strJSon += key.toString() + ':' + obj[key].toString() + ',';
+        strJSon += '"' + key.toString() + '"' + ':' + stringifyJSON(obj[key]) + ',';
       }strJSon += '}';
       return strJSon;
+  }
 };
