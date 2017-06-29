@@ -7,8 +7,8 @@
 var isClass = function(className, directory){
   // console.log(className);
   console.log(directory.className);
-  var classes = directory.className.split(" ");
-  if(classes.indexOf(className) !== -1){
+
+  if(className === directory.className){
     console.log("we have a match!");
     console.log(directory);
     return [directory];
@@ -16,6 +16,26 @@ var isClass = function(className, directory){
     return [];
   }
 };
+
+// var totalCount =0
+// var isClass = function(className, directory){
+//   // console.log(className);
+//   console.log(directory.className);
+//   if(directory.clasName !== undefined){
+//     var classes = directory.className.split(" ");
+//     console.log("this is the array of classes " + classes);
+//     if(classes.indexOf(className) !== -1){
+//       console.log("we have a match!");
+//       console.log(directory);
+//       return [directory];
+//     }else{
+//       return [];
+//     }
+//   }
+//   console.log(totalCount++);
+//   return [];
+// };
+
 
 var getElementsByClassName = function(className,currentDir,goingUp){
   if(currentDir === undefined){
@@ -48,7 +68,7 @@ var getElementsByClassName = function(className,currentDir,goingUp){
       return getElementsByClassName(className,(currentDir.childNodes[0]),false);
     }else{
   //    console.log('8');
-      console.log('there are no more children ----------------');
+    //    console.log('there are no more children ----------------');
       if(currentDir.nextSibling !== null){
   //      console.log('9');
     //    console.log("brothers and sisters");
