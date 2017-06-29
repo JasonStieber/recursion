@@ -5,15 +5,15 @@
 
 var stringifyJSON = function(obj) {
   // your code goes here
-  console.log(obj);
+  // console.log(obj);
   if(obj === null){
     return "null";
   }else if (Array.isArray(obj)) {
     var strJSon = '[';
     for(var i = 0; i <obj.length; i++){
-     strJSon += stringifyJSON(obj[i]);
-     if(i < obj.length-1){
-       strJSon += ',';
+      strJSon += stringifyJSON(obj[i]);
+      if(i < obj.length-1){
+        strJSon += ',';
      }
     }strJSon += ']';
     return strJSon;
@@ -26,7 +26,7 @@ var stringifyJSON = function(obj) {
   }else if(obj === true){
     return 'true';
   }else if(obj === false){
-      return 'false';
+    return 'false';
   }
   else{
       var strJSon = '{';
