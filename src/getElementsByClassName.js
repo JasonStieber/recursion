@@ -7,7 +7,8 @@
 var isClass = function(className, directory){
   // console.log(className);
   console.log(directory.className);
-  if(className === directory.className){
+  var classes = directory.className.split(" ");
+  if(classes.indexOf(className) !== -1){
     console.log("we have a match!");
     console.log(directory);
     return [directory];
@@ -16,9 +17,7 @@ var isClass = function(className, directory){
   }
 };
 
-var getElementsByClassName = function(className,currentDir,goingUp
-) {
-
+var getElementsByClassName = function(className,currentDir,goingUp){
   if(currentDir === undefined){
     // first run though of the programs only gets here
     console.log([].concat(getElementsByClassName(className, document,false)));
@@ -39,7 +38,7 @@ var getElementsByClassName = function(className,currentDir,goingUp
       //console.log("we are on the up path.");
       return arrIfCurrentDirIsClass.concat(getElementsByClassName(className, parent, true));
     }
-    }else{
+  }else{
 //    console.log('6');
     // console.log("we are on the down path.");
     if(currentDir.childNodes[0] !== undefined){
@@ -58,7 +57,7 @@ var getElementsByClassName = function(className,currentDir,goingUp
       }else{
     //    console.log('10');
     //    console.log('no more brothers and sisters............');
-        return arrIfCurrentDirIsClass.concat(getElementsByClassName(className,currentDir.parentNode,true));
+        return [].concat(getElementsByClassName(className,currentDir,true));
         //elementsInThisTree.concat(isClass(className, currentDir))
       }
     }
